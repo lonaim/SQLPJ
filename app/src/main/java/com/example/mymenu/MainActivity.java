@@ -43,7 +43,8 @@ public class MainActivity extends AppCompatActivity {
         }
 
         if (id == R.id.Search) {
-            Toast.makeText(this, "You clicked Search", Toast.LENGTH_SHORT).show();
+            Intent go = new Intent(this,FilterActivity.class);
+            startActivity(go);
         }
 
         return super.onOptionsItemSelected(item);

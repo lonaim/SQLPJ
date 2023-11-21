@@ -56,6 +56,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return res;
     }
 
+    public Cursor getDataNamed(String name){
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor res = db.rawQuery("SELECT * FROM "+TABLE_NAME+" WHERE "+COL_NAME.toString()+" LIKE "+"'"+name+"'", null);
+        return res;
+    }
+
     public boolean updateData(String id, String name, String surname, String email){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
