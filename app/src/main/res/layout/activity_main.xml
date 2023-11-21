@@ -34,9 +34,9 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="100dp"
+            android:onClick="onClick"
             android:text="Start here"
-            android:textSize="35dp"
-            android:onClick="onClick"/>
+            android:textSize="35dp" />
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
