@@ -58,7 +58,7 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
 
-        /* btnView = findViewById(R.id.btnView);
+        btnView = findViewById(R.id.btnView);
         btnView.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -113,7 +113,7 @@ public class RegisterActivity extends AppCompatActivity {
                 }
 
             }
-        }); */
+        });
     }
 
 
