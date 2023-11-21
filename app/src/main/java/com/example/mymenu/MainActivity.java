@@ -47,6 +47,11 @@ public class MainActivity extends AppCompatActivity {
             startActivity(go);
         }
 
+        if(id==R.id.About){
+            Intent go = new Intent(this,AboutMeActivity.class);
+            startActivity(go);
+        }
+
         return super.onOptionsItemSelected(item);
     }
 
