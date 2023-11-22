@@ -3,6 +3,7 @@ package com.example.mymenu;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.view.menu.MenuBuilder;
+import androidx.viewpager2.widget.ViewPager2;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -12,13 +13,44 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+import com.google.android.material.tabs.TabLayout;
+import com.google.android.material.tabs.TabLayoutMediator;
+
 public class MainActivity extends AppCompatActivity {
 
     Intent intent;
+    ViewPager2 viewPager;
+    MyViewPagerAdapter myAdapter;
+    TabLayout tabLayout;
    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+       TabLayout tabLayout = findViewById(R.id.tabLayout);
+
+
+       viewPager = findViewById(R.id.viewPager2);
+       myAdapter = new MyViewPagerAdapter(
+               getSupportFragmentManager(),
+               getLifecycle());
+       myAdapter.addFragment(new SignUpFrag());
+       myAdapter.addFragment(new Fragment2());
+       myAdapter.addFragment(new Fragment3());
+       viewPager.setOrientation(ViewPager2.ORIENTATION_HORIZONTAL);
+       viewPager.setAdapter(myAdapter);
+
+       new TabLayoutMediator(
+               tabLayout,
+               viewPager,
+               new TabLayoutMediator.TabConfigurationStrategy() {
+                   @Override
+                   public void onConfigureTab(@NonNull TabLayout.Tab tab, int position) {
+                       tab.setText("Tab " + (position + 1));
+
+                   }
+               }
+       ).attach();
     }
 
     @SuppressLint("RestrictedApi")
