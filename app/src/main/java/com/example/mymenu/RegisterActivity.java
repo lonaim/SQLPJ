@@ -1,12 +1,17 @@
 package com.example.mymenu;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.view.menu.MenuBuilder;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -123,5 +128,40 @@ public class RegisterActivity extends AppCompatActivity {
         builder.setTitle(title);
         builder.setMessage(message);
         builder.show();
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        int id = item.getItemId();
+
+        if (id == R.id.Home){
+            Intent go = new Intent(this,MainActivity.class);
+            startActivity(go);
+        }
+
+        if (id == R.id.Search) {
+            Intent go = new Intent(this,FilterActivity.class);
+            startActivity(go);
+        }
+
+        if(id==R.id.About){
+            Intent go = new Intent(this,AboutMeActivity.class);
+            startActivity(go);
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    @SuppressLint("RestrictedApi")
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.my_menu, menu);
+
+        if (menu instanceof MenuBuilder) {
+            MenuBuilder mb = (MenuBuilder) menu;
+            mb.setOptionalIconsVisible(true);
+        }
+        MenuItem menuItem = menu.findItem(R.id.Search);
+        return true;
     }
 }

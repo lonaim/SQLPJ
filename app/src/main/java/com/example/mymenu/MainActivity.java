@@ -71,7 +71,8 @@ public class MainActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         if (id == R.id.Home){
-            Toast.makeText(this, "You clicked Home", Toast.LENGTH_SHORT).show();
+            Intent go = new Intent(this,MainActivity.class);
+            startActivity(go);
         }
 
         if (id == R.id.Search) {
