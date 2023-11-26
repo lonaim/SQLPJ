@@ -29,6 +29,7 @@ import androidx.fragment.app.Fragment;
         surename = view.findViewById(R.id.etSure);
 
         btnCheck = view.findViewById(R.id.btnCheck);
+
         btnCheck.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
