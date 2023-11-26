@@ -3,21 +3,50 @@ package com.example.mymenu;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.view.menu.MenuBuilder;
+import androidx.viewpager2.widget.ViewPager2;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 
-public class MainActivity extends AppCompatActivity {
+import com.google.android.material.tabs.TabLayout;
+import com.google.android.material.tabs.TabLayoutMediator;
+
+public class FragHubActivity extends AppCompatActivity {
     Intent intent;
-   @Override
+    ViewPager2 viewPager;
+    MyViewPagerAdapter myAdapter;
+    TabLayout tabLayout;
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
-       super.onCreate(savedInstanceState);
-       setContentView(R.layout.activity_main);
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_fraghub);
 
+        TabLayout tabLayout = findViewById(R.id.tabLayout);
+
+
+        viewPager = findViewById(R.id.viewPager2);
+        myAdapter = new MyViewPagerAdapter(
+                getSupportFragmentManager(),
+                getLifecycle());
+        myAdapter.addFragment(new SignUpFrag());
+        myAdapter.addFragment(new SignInFrag());
+        viewPager.setOrientation(ViewPager2.ORIENTATION_HORIZONTAL);
+        viewPager.setAdapter(myAdapter);
+
+        new TabLayoutMediator(
+                tabLayout,
+                viewPager,
+                new TabLayoutMediator.TabConfigurationStrategy() {
+                    @Override
+                    public void onConfigureTab(@NonNull TabLayout.Tab tab, int position) {
+                        tab.setText("Tab " + (position + 1));
+
+                    }
+                }
+        ).attach();
     }
 
     @SuppressLint("RestrictedApi")
@@ -53,10 +82,5 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
-    }
-
-    public void onClick(View view) {
-        intent = new Intent(this, FragHubActivity.class);
-        startActivity(intent);
     }
 }
