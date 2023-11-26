@@ -59,6 +59,7 @@ public class FragHubActivity extends AppCompatActivity {
             mb.setOptionalIconsVisible(true);
         }
         MenuItem menuItem = menu.findItem(R.id.Search);
+
         return true;
     }
 
