@@ -3,6 +3,7 @@ package com.example.mymenu;
 import android.annotation.SuppressLint;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,7 +18,7 @@ import androidx.fragment.app.Fragment;
 public class SignUpFrag extends Fragment {
 
     private DatabaseHelper myDb;
-    private EditText name, surename, email, etId, etPhone;
+    private EditText etname, etsurename, etemail, etId, etPhone;
     private Button btnInsert, btnView, btnUpdate, btnDelete;
 
     @SuppressLint("MissingInflatedId")
@@ -27,9 +28,9 @@ public class SignUpFrag extends Fragment {
 
         myDb = new DatabaseHelper(requireContext());
 
-        name = view.findViewById(R.id.etName);
-        surename = view.findViewById(R.id.etSure);
-        email = view.findViewById(R.id.etMail);
+        etname = view.findViewById(R.id.etName);
+        etsurename = view.findViewById(R.id.etSure);
+        etemail = view.findViewById(R.id.etMail);
         etId = view.findViewById(R.id.etId);
         etPhone = view.findViewById(R.id.etPhone);
 
@@ -37,11 +38,15 @@ public class SignUpFrag extends Fragment {
         btnInsert.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                boolean isInserted = myDb.insertData(etId.getText().toString(),
-                        name.getText().toString(),
-                        surename.getText().toString(),
-                        email.getText().toString(),
+                boolean isInserted=false;
+
+                if(isDataValid()){
+                isInserted = myDb.insertData(etId.getText().toString(),
+                        etname.getText().toString(),
+                        etsurename.getText().toString(),
+                        etemail.getText().toString(),
                         etPhone.getText().toString());
+                }
 
                 if (isInserted)
                     Toast.makeText(requireContext(), "Data Inserted", Toast.LENGTH_LONG).show();
@@ -66,7 +71,8 @@ public class SignUpFrag extends Fragment {
                     buffer.append("ID: " + res.getString(0) + "\n");
                     buffer.append("NAME: " + res.getString(1) + "\n");
                     buffer.append("SURNAME: " + res.getString(2) + "\n");
-                    buffer.append("EMAIL: " + res.getString(3) + "\n\n");
+                    buffer.append("EMAIL: " + res.getString(3) + "\n");
+                    buffer.append("Phone: " + res.getString(4) + "\n\n");
 
                 }
                 showData("Data", buffer.toString());            }
@@ -77,14 +83,15 @@ public class SignUpFrag extends Fragment {
             @Override
             public void onClick(View v) {
                 boolean isUpdated = myDb.updateData(etId.getText().toString(),
-                        name.getText().toString(),
-                        surename.getText().toString(),
-                        email.getText().toString());
+                        etname.getText().toString(),
+                        etsurename.getText().toString(),
+                        etemail.getText().toString(),etPhone.getText().toString());
                 if (isUpdated == true) {
                     Toast.makeText(getContext(), "Data Updated", Toast.LENGTH_LONG).show();
                 } else {
                     Toast.makeText(getContext(), "Data Not Updated", Toast.LENGTH_LONG).show();
-                }            }
+                }
+                clearFields();}
         });
 
         btnDelete = view.findViewById(R.id.btnDelete);
@@ -97,7 +104,7 @@ public class SignUpFrag extends Fragment {
                 } else {
                     Toast.makeText(getContext(), "Data Not Deleted", Toast.LENGTH_LONG).show();
                 }
-            }
+            clearFields();}
         });
 
         return view;
@@ -105,9 +112,9 @@ public class SignUpFrag extends Fragment {
 
     private void clearFields() {
         etId.setText("");
-        name.setText("");
-        surename.setText("");
-        email.setText("");
+        etname.setText("");
+        etsurename.setText("");
+        etemail.setText("");
         etPhone.setText("");
     }
 
@@ -118,4 +125,44 @@ public class SignUpFrag extends Fragment {
         builder.setMessage(message);
         builder.show();
     }
+
+    private boolean isDataValid() {
+        // Perform data integrity checks
+
+        // Check if the name is not empty and contains only letters
+        String name = etname.getText().toString();
+        if (etname.length()==0|| !name.matches("[a-zA-Z]+")) {
+            return false;
+        }
+
+        // Check if the surname is not empty and contains only letters
+        String surname = etsurename.getText().toString();
+        if (etsurename.length()==0 || !surname.matches("[a-zA-Z]+")) {
+            return false;
+        }
+
+        // Check if the email is valid
+        String email = etemail.getText().toString();
+        if (etemail.length()==0 || !Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            return false;
+        }
+
+        // Check if the phone number is valid (you might want to add more checks)
+        String phone = etPhone.getText().toString();
+        if (etPhone.length()==0 || !Patterns.PHONE.matcher(phone).matches()) {
+            return false;
+        }
+
+        // Check if the ID is not empty and contains only alphanumeric characters
+        String id = etId.getText().toString();
+        if (etId.length()==0|| !id.matches("[a-zA-Z0-9]+")) {
+            return false;
+        }
+
+
+        // If all checks pass, data is considered valid
+        return true;
+    }
+
+
 }
