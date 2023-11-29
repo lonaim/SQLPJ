@@ -131,25 +131,25 @@ public class SignUpFrag extends Fragment {
 
         // Check if the name is not empty and contains only letters
         String name = etname.getText().toString();
-        if (etname.length()==0|| !name.matches("[a-zA-Z]+")) {
+        if (etname.length()==0|| !name.matches("[a-zA-Z]+")||(myDb.getDataNamed(etname.getText().toString())).getCount()>0) {
             return false;
         }
 
         // Check if the surname is not empty and contains only letters
         String surname = etsurename.getText().toString();
-        if (etsurename.length()==0 || !surname.matches("[a-zA-Z]+")) {
+        if (etsurename.length()==0 || !surname.matches("[a-zA-Z]+")||(myDb.getDataSur(etsurename.getText().toString())).getCount()>0) {
             return false;
         }
 
         // Check if the email is valid
         String email = etemail.getText().toString();
-        if (etemail.length()==0 || !Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+        if (etemail.length()==0 || !Patterns.EMAIL_ADDRESS.matcher(email).matches()||(myDb.getDataEmail(etemail.getText().toString())).getCount()>0) {
             return false;
         }
 
         // Check if the phone number is valid (you might want to add more checks)
         String phone = etPhone.getText().toString();
-        if (etPhone.length()==0 || !Patterns.PHONE.matcher(phone).matches()) {
+        if (etPhone.length()==0 || !Patterns.PHONE.matcher(phone).matches()||(myDb.getDataPhone(etPhone.getText().toString())).getCount()>0) {
             return false;
         }
 
