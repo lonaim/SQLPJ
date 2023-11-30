@@ -1,9 +1,7 @@
 package com.example.mymenu;
 
 import android.annotation.SuppressLint;
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -17,7 +15,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
-    public class SignInFrag extends Fragment {
+public class SignInFrag extends Fragment {
 
     private DatabaseHelper myDb;
     private EditText name, surename;
@@ -33,7 +31,7 @@ import androidx.fragment.app.Fragment;
 
         name = view.findViewById(R.id.etName);
         surename = view.findViewById(R.id.etSure);
-        checkboxRememberMe = view.findViewById(R.id.checkboxRememberMe);
+        //checkboxRememberMe = view.findViewById(R.id.checkboxRememberMe);
 
         btnCheck = view.findViewById(R.id.btnCheck);
 
@@ -48,7 +46,7 @@ import androidx.fragment.app.Fragment;
                         buffer.append(res.getString(1).toString());
                     }
                     String name = buffer.toString();
-                    Intent go = new Intent(view.getContext(), UserPlace.class);
+                    Intent go = new Intent(view.getContext(), UserPage.class);
                     go.putExtra("UName", name);
                     startActivity(go);
                 }

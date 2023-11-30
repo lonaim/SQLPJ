@@ -1,15 +1,15 @@
 package com.example.mymenu;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.view.menu.MenuBuilder;
-import androidx.viewpager2.widget.ViewPager2;
-
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.view.menu.MenuBuilder;
+import androidx.viewpager2.widget.ViewPager2;
 
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
@@ -32,7 +32,7 @@ public class FragHubActivity extends AppCompatActivity {
                 getSupportFragmentManager(),
                 getLifecycle());
         myAdapter.addFragment(new SignUpFrag());
-            myAdapter.addFragment(new SignInFrag());
+        myAdapter.addFragment(new SignInFrag());
         viewPager.setOrientation(ViewPager2.ORIENTATION_HORIZONTAL);
         viewPager.setAdapter(myAdapter);
 
@@ -43,7 +43,6 @@ public class FragHubActivity extends AppCompatActivity {
                     @Override
                     public void onConfigureTab(@NonNull TabLayout.Tab tab, int position) {
                         tab.setText("Tab " + (position + 1));
-
                     }
                 }
         ).attach();

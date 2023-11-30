@@ -61,23 +61,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         Cursor res = db.rawQuery("SELECT * FROM "+TABLE_NAME+" WHERE "+COL_NAME.toString()+" LIKE "+"'"+name+"'", null);
         return res;
     }
-    public Cursor getDataSur(String sur){
-        SQLiteDatabase db = this.getWritableDatabase();
-        Cursor res = db.rawQuery("SELECT * FROM "+TABLE_NAME+" WHERE "+COL_SURNAME.toString()+" LIKE "+"'"+sur+"'", null);
-        return res;
-    }
-    public Cursor getDataEmail(String email){
-        SQLiteDatabase db = this.getWritableDatabase();
-        Cursor res = db.rawQuery("SELECT * FROM "+TABLE_NAME+" WHERE "+COL_EMAIL.toString()+" LIKE "+"'"+email+"'", null);
-        return res;
-    }
-    public Cursor getDataPhone(String phone){
-        SQLiteDatabase db = this.getWritableDatabase();
-        Cursor res = db.rawQuery("SELECT * FROM "+TABLE_NAME+" WHERE "+COL_PHONE.toString()+" LIKE "+"'"+phone+"'", null);
-        return res;
-    }
 
-    public boolean updateData(String id, String name, String surname, String email,String phone) {
+    public boolean updateData(String id, String name, String surname, String email,String phone){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put(COL_ID, id);
