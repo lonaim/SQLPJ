@@ -61,15 +61,30 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         Cursor res = db.rawQuery("SELECT * FROM "+TABLE_NAME+" WHERE "+COL_NAME.toString()+" LIKE "+"'"+name+"'", null);
         return res;
     }
+    public Cursor getDataSur(String sur){
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor res = db.rawQuery("SELECT * FROM "+TABLE_NAME+" WHERE "+COL_SURNAME.toString()+" LIKE "+"'"+sur+"'", null);
+        return res;
+    }
+    public Cursor getDataEmail(String email){
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor res = db.rawQuery("SELECT * FROM "+TABLE_NAME+" WHERE "+COL_EMAIL.toString()+" LIKE "+"'"+email+"'", null);
+        return res;
+    }
+    public Cursor getDataPhone(String phone){
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor res = db.rawQuery("SELECT * FROM "+TABLE_NAME+" WHERE "+COL_PHONE.toString()+" LIKE "+"'"+phone+"'", null);
+        return res;
+    }
 
-    public boolean updateData(String id, String name, String surname, String email){
+    public boolean updateData(String id, String name, String surname, String email,String phone) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put(COL_ID, id);
         contentValues.put(COL_NAME, name);
         contentValues.put(COL_SURNAME, surname);
         contentValues.put(COL_EMAIL, email);
-        contentValues.put(COL_PHONE, email);
+        contentValues.put(COL_PHONE, phone);
         db.update(TABLE_NAME, contentValues, "ID = ?", new String[] {id});
         return true;
     }
@@ -84,5 +99,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         boolean exists = (cursor.getCount() > 0);
         cursor.close();
         return exists;
+    }
+
+    public Cursor getDataCursor(String name, String surname) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE " + COL_NAME + " = ? AND " + COL_SURNAME + " = ?", new String[]{name, surname});
+        return cursor;
     }
 }

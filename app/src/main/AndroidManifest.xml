@@ -13,6 +13,14 @@
         android:theme="@style/Theme.MyMenu"
         tools:targetApi="31">
         <activity
+            android:name=".UserPlace"
+            android:exported="false" />
+        <activity
+            android:name=".UserPlace"
+            android:exported="false"
+            android:label="@string/title_activity_user_place"
+            android:theme="@style/Theme.MyMenu" />
+        <activity
             android:name=".FragHubActivity"
             android:exported="false" />
         <activity

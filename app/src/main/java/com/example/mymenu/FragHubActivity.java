@@ -32,7 +32,7 @@ public class FragHubActivity extends AppCompatActivity {
                 getSupportFragmentManager(),
                 getLifecycle());
         myAdapter.addFragment(new SignUpFrag());
-        myAdapter.addFragment(new SignInFrag());
+            myAdapter.addFragment(new SignInFrag());
         viewPager.setOrientation(ViewPager2.ORIENTATION_HORIZONTAL);
         viewPager.setAdapter(myAdapter);
 
