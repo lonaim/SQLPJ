@@ -13,7 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 public class UserPage extends AppCompatActivity {
 
     TextView tvUser;
-    Button logoutBt;
+    Button logoutBtn;
     Intent intent;
     public static final String SHARED_PREFS = "sharedPrefs";
 
@@ -23,12 +23,29 @@ public class UserPage extends AppCompatActivity {
         setContentView(R.layout.activity_user_page);
 
         tvUser = findViewById(R.id.tvUser);
+        logoutBtn = findViewById(R.id.logoutbtn);
 
         Intent in = getIntent();
         if (in != null && in.getExtras() != null) {
             Bundle xtras = in.getExtras();
             String name = xtras.getString("UName");
-            tvUser.setText("Welcome " + name);
+            tvUser.setText("Hello " + name + "!");
         }
+
+        logoutBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Clear remember-me preference when logging out
+                SharedPreferences.Editor editor = getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE).edit();
+                editor.remove("rememberMe");
+                editor.remove("username");
+                editor.apply();
+
+                // Redirect to FragHubActivity after logout
+                Intent go = new Intent(view.getContext(), FragHubActivity.class);
+                startActivity(go);
+                finish(); // Close the UserPage activity
+            }
+        });
     }
 }
