@@ -48,11 +48,11 @@ public class SignUpFrag extends Fragment {
                         etPhone.getText().toString());
                 }
 
-                if (isInserted)
+                if (!isInserted)
                     if(!isDataValid()) Toast.makeText(requireContext(), "Data Not valid", Toast.LENGTH_LONG).show();
-                    else Toast.makeText(requireContext(), "Data Inserted", Toast.LENGTH_LONG).show();
+                    else Toast.makeText(requireContext(), "Data not Inserted", Toast.LENGTH_LONG).show();
                 else
-                    Toast.makeText(requireContext(), "Data not Inserted", Toast.LENGTH_LONG).show();
+                    Toast.makeText(requireContext(), "Data Inserted", Toast.LENGTH_LONG).show();
                 clearFields();
             }
         });
