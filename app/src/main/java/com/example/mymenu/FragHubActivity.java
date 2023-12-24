@@ -35,6 +35,7 @@ public class FragHubActivity extends AppCompatActivity {
         myAdapter.addFragment(new SignInFrag());
         viewPager.setOrientation(ViewPager2.ORIENTATION_HORIZONTAL);
         viewPager.setAdapter(myAdapter);
+        String[] name = new String[]{"Sign Up", "Sign In"};
 
         new TabLayoutMediator(
                 tabLayout,
@@ -42,7 +43,7 @@ public class FragHubActivity extends AppCompatActivity {
                 new TabLayoutMediator.TabConfigurationStrategy() {
                     @Override
                     public void onConfigureTab(@NonNull TabLayout.Tab tab, int position) {
-                        tab.setText("Tab " + (position + 1));
+                        tab.setText(name[position]);
                     }
                 }
         ).attach();
@@ -57,14 +58,23 @@ public class FragHubActivity extends AppCompatActivity {
             MenuBuilder mb = (MenuBuilder) menu;
             mb.setOptionalIconsVisible(true);
         }
-        MenuItem menuItem = menu.findItem(R.id.Search);
-
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
+
+        if (id == R.id.btnMute) {
+            if (MainActivity.isPlaying) {
+                MainActivity.mServ.pauseMusic();
+                item.setTitle("Unmute");
+            } else {
+                MainActivity.mServ.resumeMusic();
+                item.setTitle("Mute");
+            }
+            MainActivity.isPlaying = !MainActivity.isPlaying;
+        }
 
         if (id == R.id.Home){
             Intent go = new Intent(this,MainActivity.class);

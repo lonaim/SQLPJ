@@ -13,7 +13,6 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
@@ -82,5 +81,6 @@ public class SignInFrag extends Fragment {
             go.putExtra("UName", savedUsername);
             startActivity(go);
         }
+
     }
 }
